@@ -1,7 +1,7 @@
 ### Hi there 👋
 
 - 🌱 I’m currently learning **How to build better Github Actions**
-- 💬 Ask me about **Homeautomation**, **SAP Cloud ALM**
+
 
 <!--
 **rangulvers/rangulvers** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
