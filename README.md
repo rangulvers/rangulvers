@@ -6,19 +6,21 @@
 
 ### whoami
 
-Homelab builder and Python tinkerer based in Germany. I automate things that probably don't need automating — but that's half the fun. Passionate about open-source, self-hosted tools, and making my house smarter one Zigbee device at a time.
+Builder of things that probably don't need building — based in Germany. I run a Raspberry Pi AI hub that handles calendar lookups, voice transcription, and multi-project dev tasks via Telegram. I shipped a German municipal transparency portal (scraper → FastAPI → React → Railway) and tinker with video projection mapping, home automation, and whatever side project has captured my attention this week.
 
 ---
 
 ### stack
 
 ![Python](https://img.shields.io/badge/Python-0d1117?style=flat-square&logo=python&logoColor=58a6ff)
+![TypeScript](https://img.shields.io/badge/TypeScript-0d1117?style=flat-square&logo=typescript&logoColor=58a6ff)
+![React](https://img.shields.io/badge/React-0d1117?style=flat-square&logo=react&logoColor=58a6ff)
+![FastAPI](https://img.shields.io/badge/FastAPI-0d1117?style=flat-square&logo=fastapi&logoColor=58a6ff)
+![Docker](https://img.shields.io/badge/Docker-0d1117?style=flat-square&logo=docker&logoColor=58a6ff)
 ![Home Assistant](https://img.shields.io/badge/Home_Assistant-0d1117?style=flat-square&logo=homeassistant&logoColor=58a6ff)
+![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi-0d1117?style=flat-square&logo=raspberrypi&logoColor=58a6ff)
 ![Zigbee](https://img.shields.io/badge/Zigbee-0d1117?style=flat-square&logo=zigbee&logoColor=58a6ff)
 ![Node-RED](https://img.shields.io/badge/Node--RED-0d1117?style=flat-square&logo=nodered&logoColor=58a6ff)
-![Docker](https://img.shields.io/badge/Docker-0d1117?style=flat-square&logo=docker&logoColor=58a6ff)
-![FastAPI](https://img.shields.io/badge/FastAPI-0d1117?style=flat-square&logo=fastapi&logoColor=58a6ff)
-![Arduino](https://img.shields.io/badge/Arduino-0d1117?style=flat-square&logo=arduino&logoColor=58a6ff)
 ![Linux](https://img.shields.io/badge/Linux-0d1117?style=flat-square&logo=linux&logoColor=58a6ff)
 
 ---
@@ -33,5 +35,5 @@ Homelab builder and Python tinkerer based in Germany. I automate things that pro
 ---
 
 <div align="center">
-  <sub>always happy to chat about home automation, python, or homelab setups</sub>
+  <sub>always happy to chat about AI agents, home automation, civic tech, or why my Telegram bot keeps stealing its own polling slot</sub>
 </div>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile Preview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 32px;
+    }
+    .center { text-align: center; }
+    hr { border: none; border-top: 1px solid #30363d; margin: 24px 0; }
+    h3 { color: #e6edf3; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+    p { color: #8b949e; margin-bottom: 8px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .badges img { height: 22px; }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .stats { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 8px 0; }
+    .stats img { height: 150px; }
+    sub { color: #8b949e; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <div class="center">
+      <!--
+        Strategy: each line is a single <text> element that appears at a set time.
+        Command lines split into: prompt (blue) + cmd (white), appearing together.
+        Output lines appear as full strings.
+        Cursor blinks at end.
+
+        Timeline:
+          0.3s  prompt + "whoami" command appears
+          0.8s  whoami output (2 lines)
+          1.8s  prompt + "ls projects/" command
+          2.3s  project list (4 lines, staggered)
+          3.6s  prompt + "ssh pi@homelab" command
+          4.1s  ssh output (3 lines)
+          5.2s  prompt + "git log --oneline" command
+          5.7s  commit log (5 lines, staggered)
+          7.2s  prompt + "df -h /dev/brain" command
+          7.7s  df output (4 lines)
+          9.2s  final prompt + blinking cursor
+      -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 530" width="680" height="530"
+           style="max-width:100%;border-radius:8px;font-family:'Courier New',Courier,monospace;">
+        <defs>
+          <style>
+            text { font-family: 'Courier New', Courier, monospace; font-size: 13px; }
+            .title  { fill: #8b949e; font-size: 12px; }
+            .prompt { fill: #58a6ff; }
+            .dollar { fill: #8b949e; }
+            .cmd    { fill: #e6edf3; }
+            .out    { fill: #8b949e; }
+            .green  { fill: #56d364; }
+            .yellow { fill: #e3b341; }
+            .cyan   { fill: #79c0ff; }
+            .red    { fill: #f85149; }
+          </style>
+        </defs>
+
+        <!-- window chrome -->
+        <rect width="680" height="530" rx="10" ry="10" fill="#0d1117"/>
+        <rect width="680" height="530" rx="10" ry="10" fill="none" stroke="#30363d" stroke-width="1.5"/>
+        <rect width="680" height="36" rx="10" ry="10" fill="#161b22"/>
+        <rect y="18" width="680" height="18" fill="#161b22"/>
+        <circle cx="20" cy="18" r="6" fill="#ff5f57"/>
+        <circle cx="40" cy="18" r="6" fill="#febc2e"/>
+        <circle cx="60" cy="18" r="6" fill="#28c840"/>
+        <text x="340" y="23" text-anchor="middle" class="title">rangulvers — bash — 80×24</text>
+
+        <!-- ══ LINE 1: whoami command ══ -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="0.3s" fill="freeze"/>
+          <text x="20" y="72" class="prompt">rangulvers@homelab</text>
+          <text x="183" y="72" class="dollar">:~$</text>
+          <text x="212" y="72" class="cmd">whoami</text>
+        </g>
+
+        <!-- whoami output -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="0.8s" fill="freeze"/>
+          <text x="20" y="91" class="green">rangulvers</text>
+          <text x="108" y="91" class="out"> · builder of things that don't need building · Germany</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="1.0s" fill="freeze"/>
+          <text x="20" y="108" class="out">  Pi AI hub · civic tech · homelab · projection mapping</text>
+        </g>
+
+        <!-- ══ LINE 2: ls projects/ ══ -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="1.8s" fill="freeze"/>
+          <text x="20" y="131" class="prompt">rangulvers@homelab</text>
+          <text x="183" y="131" class="dollar">:~$</text>
+          <text x="212" y="131" class="cmd">ls projects/</text>
+        </g>
+
+        <!-- project list — single line per project -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="2.3s" fill="freeze"/>
+          <text x="20" y="150"><tspan class="cyan">council-portal/</tspan><tspan class="out" dx="8">FastAPI · React · SQLite · Railway · civic tech</tspan></text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="2.6s" fill="freeze"/>
+          <text x="20" y="167"><tspan class="cyan">pi-agent/</tspan><tspan class="out" dx="8">Telegram · Claude · Whisper · MCP · always-on AI</tspan></text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="2.9s" fill="freeze"/>
+          <text x="20" y="184"><tspan class="cyan">phantomcast/</tspan><tspan class="out" dx="8">Python · Pi 5 · 1080p · video projection mapping</tspan></text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="3.2s" fill="freeze"/>
+          <text x="20" y="201"><tspan class="cyan">homelab/</tspan><tspan class="out" dx="8">Home Assistant · Zigbee · Node-RED · Docker · Shelly</tspan></text>
+        </g>
+
+        <!-- ══ LINE 3: ssh pi@homelab ══ -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="3.6s" fill="freeze"/>
+          <text x="20" y="224" class="prompt">rangulvers@homelab</text>
+          <text x="183" y="224" class="dollar">:~$</text>
+          <text x="212" y="224" class="cmd">ssh pi@homelab</text>
+        </g>
+
+        <!-- ssh output -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="4.1s" fill="freeze"/>
+          <text x="20" y="243" class="green">connected</text>
+          <text x="93" y="243" class="out"> raspberrypi5 · tmux: claude-agent · Pi OS</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="4.3s" fill="freeze"/>
+          <text x="20" y="260" class="yellow">services</text>
+          <text x="80" y="260" class="out">  telegram-bot · whisper · mcp-server · claude </text>
+          <text x="518" y="260" class="green">▶ up</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="4.5s" fill="freeze"/>
+          <text x="20" y="277" class="yellow">cron</text>
+          <text x="52" y="277" class="out">      council-sync 06:00 · all tables OK · 51 commits this month</text>
+        </g>
+
+        <!-- ══ LINE 4: git log --oneline ══ -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="5.2s" fill="freeze"/>
+          <text x="20" y="300" class="prompt">rangulvers@homelab</text>
+          <text x="183" y="300" class="dollar">:~$</text>
+          <text x="212" y="300" class="cmd">git log --oneline</text>
+        </g>
+
+        <!-- commit log -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="5.7s" fill="freeze"/>
+          <text x="20" y="319" class="yellow">f3a91bc</text>
+          <text x="82" y="319" class="out"> feat: council portal — FTS5 search + clickable ward map</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="5.9s" fill="freeze"/>
+          <text x="20" y="336" class="yellow">c7d42e1</text>
+          <text x="82" y="336" class="out"> fix: pi-agent telegram polling conflict (again)</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="6.1s" fill="freeze"/>
+          <text x="20" y="353" class="yellow">a81f05d</text>
+          <text x="82" y="353" class="out"> feat: whisper voice transcription wired into claude agent</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="6.3s" fill="freeze"/>
+          <text x="20" y="370" class="yellow">9e3bc77</text>
+          <text x="82" y="370" class="out"> wip: automating things that definitely didn't need automating</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="6.5s" fill="freeze"/>
+          <text x="20" y="387" class="yellow">2d6af90</text>
+          <text x="82" y="387" class="out"> fix: wife still not impressed by 47 new zigbee devices</text>
+        </g>
+
+        <!-- ══ LINE 5: df -h /dev/brain ══ -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="7.2s" fill="freeze"/>
+          <text x="20" y="410" class="prompt">rangulvers@homelab</text>
+          <text x="183" y="410" class="dollar">:~$</text>
+          <text x="212" y="410" class="cmd">df -h /dev/brain</text>
+        </g>
+
+        <!-- df output -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="7.7s" fill="freeze"/>
+          <text x="20" y="429" class="cyan">Filesystem         Size  Used  Avail  Use%  Mounted on</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="7.9s" fill="freeze"/>
+          <text x="20" y="446" class="out">/dev/sleep          8G    7.9G  100M    99%  /dev/brain</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="8.1s" fill="freeze"/>
+          <text x="20" y="463" class="out">/dev/coffee        16G   15.7G  300M    98%  /dev/brain</text>
+        </g>
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="8.3s" fill="freeze"/>
+          <text x="20" y="480" class="green">/dev/side-projects   ∞      ∞     ∞      ∞   /dev/brain</text>
+        </g>
+
+        <!-- ══ Final prompt + blinking cursor ══ -->
+        <g opacity="0">
+          <animate attributeName="opacity" values="0;1" dur="0.05s" begin="9.2s" fill="freeze"/>
+          <text x="20" y="510" class="prompt">rangulvers@homelab</text>
+          <text x="183" y="510" class="dollar">:~$</text>
+          <rect x="213" y="497" width="8" height="14" fill="#58a6ff" rx="1">
+            <animate attributeName="opacity" values="1;0;1" dur="1s" begin="9.4s" repeatCount="indefinite"/>
+          </rect>
+        </g>
+      </svg>
+    </div>
+
+    <hr/>
+
+    <h3>whoami</h3>
+    <p>Builder of things that probably don't need building — based in Germany. I run a Raspberry Pi AI hub that handles calendar lookups, voice messages, and multi-project dev tasks via Telegram. I built a German municipal transparency portal (scraper → FastAPI → React → Railway) and tinker with projection mapping, home automation, and whatever side project has captured my attention this week.</p>
+
+    <hr/>
+
+    <h3>stack</h3>
+    <div class="badges">
+      <img src="https://img.shields.io/badge/Python-0d1117?style=flat-square&logo=python&logoColor=58a6ff" alt="Python"/>
+      <img src="https://img.shields.io/badge/TypeScript-0d1117?style=flat-square&logo=typescript&logoColor=58a6ff" alt="TypeScript"/>
+      <img src="https://img.shields.io/badge/React-0d1117?style=flat-square&logo=react&logoColor=58a6ff" alt="React"/>
+      <img src="https://img.shields.io/badge/FastAPI-0d1117?style=flat-square&logo=fastapi&logoColor=58a6ff" alt="FastAPI"/>
+      <img src="https://img.shields.io/badge/Docker-0d1117?style=flat-square&logo=docker&logoColor=58a6ff" alt="Docker"/>
+      <img src="https://img.shields.io/badge/Home_Assistant-0d1117?style=flat-square&logo=homeassistant&logoColor=58a6ff" alt="Home Assistant"/>
+      <img src="https://img.shields.io/badge/Raspberry_Pi-0d1117?style=flat-square&logo=raspberrypi&logoColor=58a6ff" alt="Raspberry Pi"/>
+      <img src="https://img.shields.io/badge/Zigbee-0d1117?style=flat-square&logo=zigbee&logoColor=58a6ff" alt="Zigbee"/>
+      <img src="https://img.shields.io/badge/Node--RED-0d1117?style=flat-square&logo=nodered&logoColor=58a6ff" alt="Node-RED"/>
+      <img src="https://img.shields.io/badge/Linux-0d1117?style=flat-square&logo=linux&logoColor=58a6ff" alt="Linux"/>
+    </div>
+
+    <hr/>
+
+    <h3>stats</h3>
+    <div class="stats">
+      <img src="https://github-readme-stats.vercel.app/api?username=rangulvers&show_icons=true&theme=github_dark&hide_border=true&count_private=true&bg_color=0d1117&title_color=58a6ff&text_color=8b949e&icon_color=58a6ff" alt="stats"/>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=rangulvers&layout=compact&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=58a6ff&text_color=8b949e" alt="top langs"/>
+    </div>
+
+    <hr/>
+
+    <div class="center">
+      <sub>always happy to chat about AI agents, home automation, civic tech, or why my Telegram bot keeps stealing its own polling slot</sub>
+    </div>
+
+  </div>
+</body>
+</html>
