@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="images/terminal.svg" alt="terminal intro" />
+  <img src="images/terminal.gif" alt="terminal intro" />
 </div>
 
 ---
